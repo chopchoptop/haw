@@ -1,0 +1,50 @@
+{
+    "name": "@choptop/haw",
+    "version": "0.0.1",
+    "description": "ic kit",
+    "main": "index.js",
+    "scripts": {
+        "build": "tsc",
+        "test": "jest --config jestconfig.json",
+        "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+        "lint": "eslint src",
+        "prepare": "npm run build",
+        "prepublishOnly": "npm run test && npm run lint",
+        "preversion": "npm run lint",
+        "version": "npm run format && git add -A src",
+        "postversion": "git push && git push --tags"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+git@github.com:lazyanubis/haw.git"
+    },
+    "keywords": [
+        "ic",
+        "kit"
+    ],
+    "author": "Anubis",
+    "private": false,
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/lazyanubis/haw/issues"
+    },
+    "homepage": "https://github.com/lazyanubis/haw#readme",
+    "devDependencies": {
+        "@types/jest": "^29.5.12",
+        "@typescript-eslint/eslint-plugin": "^7.6.0",
+        "@typescript-eslint/parser": "^7.6.0",
+        "eslint": "^8.57.0",
+        "eslint-config-prettier": "^9.1.0",
+        "jest": "^29.7.0",
+        "prettier": "^3.2.5",
+        "ts-jest": "^29.1.2",
+        "typescript": "^5.4.5"
+    },
+    "files": [
+        "dist/**/*"
+    ],
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+    }
+}
