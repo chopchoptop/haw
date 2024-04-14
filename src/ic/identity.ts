@@ -7,9 +7,12 @@ import { principal2account } from './account';
 
 const IC_HTTP_HOST = 'https://icp-api.io/';
 
+export const getAnonymousAgent = (): HttpAgent => {
+    return new HttpAgent({ host: IC_HTTP_HOST });
+};
 export const getAnonymousActorCreator = (): ActorCreator => {
     return async <T>(idlFactory: IDL.InterfaceFactory, canisterId: string) => {
-        const agent = new HttpAgent({ host: IC_HTTP_HOST });
+        const agent = getAnonymousAgent();
         return Actor.createActor<T>(idlFactory, { agent, canisterId });
     };
 };
@@ -37,6 +40,7 @@ export const getIdentityBySecretKey = async (secret_key: string): Promise<Connec
     return {
         principal,
         account,
+        agent,
         creator: getActorCreatorByAgent(agent),
     };
 };

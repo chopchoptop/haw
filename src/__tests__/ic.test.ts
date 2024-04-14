@@ -1,6 +1,6 @@
 import { formatDateTime } from '../data/dates';
-import { array2hex } from '../data/hex';
-import { canister_status, canister_candid } from '../ic/status';
+import { array2hex, hex2array } from '../data/hex';
+import { canister_status_info, canister_candid } from '../ic/common';
 import { Ed25519KeyIdentity } from '@dfinity/identity';
 
 test('random identity', () => {

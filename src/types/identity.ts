@@ -1,4 +1,4 @@
-import { ActorSubclass } from '@dfinity/agent';
+import { ActorSubclass, HttpAgent } from '@dfinity/agent';
 import { IDL } from '@dfinity/candid';
 
 export type ActorCreator = <T>(
@@ -9,5 +9,6 @@ export type ActorCreator = <T>(
 export type ConnectedIdentity = {
     principal: string;
     account: string;
+    agent: HttpAgent;
     creator: ActorCreator; // 登录的凭证
 };
