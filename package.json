@@ -1,8 +1,8 @@
 {
     "name": "@choptop/haw",
-    "version": "0.0.1",
+    "version": "0.0.5",
     "description": "ic kit",
-    "main": "index.js",
+    "main": "./dist/index",
     "scripts": {
         "build": "tsc",
         "test": "jest --config jestconfig.json",
@@ -29,6 +29,14 @@
         "url": "https://github.com/lazyanubis/haw/issues"
     },
     "homepage": "https://github.com/lazyanubis/haw#readme",
+    "dependencies": {
+        "@cloudflare/workers-types": "^4.20240405.0",
+        "@dfinity/agent": "^1.2.0",
+        "@dfinity/candid": "^1.2.0",
+        "@dfinity/identity": "^1.2.0",
+        "@dfinity/principal": "^1.2.0",
+        "dayjs": "^1.11.10"
+    },
     "devDependencies": {
         "@types/jest": "^29.5.12",
         "@typescript-eslint/eslint-plugin": "^7.6.0",
