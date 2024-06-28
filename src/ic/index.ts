@@ -1,3 +1,5 @@
+export * from './collection/ext';
+
 export * from './account';
 export * from './anonymous';
 export * from './code';
