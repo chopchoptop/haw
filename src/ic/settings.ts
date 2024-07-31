@@ -19,6 +19,7 @@ export const update_settings = async ({
         compute_allocation?: string;
         freezing_threshold?: string;
         reserved_cycles_limit?: string;
+        wasm_memory_limit?: string;
         log_visibility?: 'controllers' | 'public';
     };
 }): Promise<void> => {
@@ -33,6 +34,7 @@ export const update_settings = async ({
             compute_allocation: wrapOptionMap(s.compute_allocation, string2bigint),
             freezing_threshold: wrapOptionMap(s.freezing_threshold, string2bigint),
             reserved_cycles_limit: wrapOptionMap(s.reserved_cycles_limit, string2bigint),
+            wasm_memory_limit: wrapOptionMap(s.wasm_memory_limit, string2bigint),
             log_visibility: wrapOptionMap(s.freezing_threshold, (s) => {
                 switch (s) {
                     case 'controllers':
