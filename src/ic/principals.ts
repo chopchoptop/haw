@@ -6,6 +6,7 @@ export const isPrincipalText = (text: string | undefined): boolean => {
     try {
         Principal.fromText(text);
         return true;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
         return false;
     }

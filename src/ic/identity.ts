@@ -17,13 +17,13 @@ export const getAnonymousActorCreator = (): ActorCreator => {
     };
 };
 
-const getIdentityFromSecretKey = async (secret_key: string): Promise<Identity> => {
+export const getIdentityFromSecretKey = async (secret_key: string): Promise<Identity> => {
     const seed = hex2array(secret_key);
     const identity = Ed25519KeyIdentity.fromSecretKey(new Uint8Array(seed));
     return identity;
 };
 
-const getActorCreatorByAgent = (agent: HttpAgent): ActorCreator => {
+export const getActorCreatorByAgent = (agent: HttpAgent): ActorCreator => {
     return async <T>(idlFactory: IDL.InterfaceFactory, canisterId: string) => {
         return Actor.createActor<T>(idlFactory, { agent, canisterId });
     };

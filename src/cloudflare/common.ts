@@ -1,3 +1,4 @@
+import { Response } from '@cloudflare/workers-types';
 import { success as _success, failed as _failed } from '../common/message';
 export {
     FAILED_CODE_SYSTEM_ERROR,

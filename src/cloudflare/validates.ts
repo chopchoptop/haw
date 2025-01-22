@@ -1,3 +1,4 @@
+import { Response } from '@cloudflare/workers-types';
 import { hex2array } from '../data/hex';
 import { isCanisterIdText, isPrincipalText } from '../ic/principals';
 import { failed, FAILED_CODE_BAD_REQUEST } from './common';
@@ -30,6 +31,7 @@ export const check_integer = (
         }
 
         return { id };
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
         return {
             err: failed(FAILED_CODE_BAD_REQUEST, `${tips ?? 'id'} is invalid.`),
@@ -68,6 +70,7 @@ export const check_hex = (
     if (hex === undefined) return {};
     try {
         return { array: hex2array(hex) };
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
         return { err: failed(FAILED_CODE_BAD_REQUEST, `${tips ?? 'hex'} is invalid.`) };
     }
