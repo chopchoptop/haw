@@ -1,4 +1,4 @@
-import { getCrc32 } from '@dfinity/principal/lib/cjs/utils/getCrc';
+import * as crc32 from 'crc-32';
 import { sha224 } from '@noble/hashes/sha2';
 import { string2array } from '../data/arrays';
 import { array2hex, hex2array } from '../data/hex';
@@ -30,7 +30,7 @@ export const principal2account_array = (principal: string, subaccount?: number |
     ];
 
     const hash = sha224(new Uint8Array(buffer));
-    const checksum = getCrc32(hash);
+    const checksum = crc32.buf(hash);
 
     const result = [
         (checksum >> 24) & 0xff,
