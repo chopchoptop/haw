@@ -1,7 +1,7 @@
-import { getManagementCanister } from '@dfinity/agent';
 import { string2principal } from '../data/principal';
 import { ConnectedIdentity } from '../types';
 import { string2bigint, wrapOptionMap } from '../data';
+import { get_management_actor } from '.';
 
 /// 更新罐子设置
 /// ! Only the controllers of the canister
@@ -24,7 +24,7 @@ export const update_settings = async ({
     };
 }): Promise<void> => {
     const { agent } = identity;
-    const actor = getManagementCanister({ agent });
+    const actor = get_management_actor(agent);
     const s = settings;
     await actor.update_settings({
         canister_id: string2principal(canister_id),

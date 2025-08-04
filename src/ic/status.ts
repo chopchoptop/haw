@@ -1,8 +1,8 @@
-import { getManagementCanister } from '@dfinity/agent';
 import { principal2string, string2principal } from '../data/principal';
 import { ConnectedIdentity } from '../types';
 import { array2hex, bigint2string, string2bigint, unwrapOptionMap, unwrapVariantKey, wrapOptionMap } from '../data';
 import { Principal } from '@dfinity/principal';
+import { get_management_actor } from '.';
 
 /// 查询罐子状态
 /// ! Only the controllers of the canister
@@ -30,8 +30,9 @@ export const canister_status = async ({
     module_hash?: string;
 }> => {
     const { agent } = identity;
-    const actor = getManagementCanister({ agent });
-    const r = await actor.canister_status({
+    const actor = get_management_actor(agent);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const r: any = await actor.canister_status({
         canister_id: string2principal(canister_id),
     });
     return {
@@ -101,8 +102,9 @@ export const canister_info = async ({
     }[];
 }> => {
     const { agent } = identity;
-    const actor = getManagementCanister({ agent });
-    const r = await actor.canister_info({
+    const actor = get_management_actor(agent);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const r: any = await actor.canister_info({
         canister_id: string2principal(canister_id),
         num_requested_changes: wrapOptionMap(num_requested_changes, string2bigint),
     });
@@ -110,7 +112,8 @@ export const canister_info = async ({
         controllers: r.controllers.map(principal2string),
         module_hash: unwrapOptionMap(r.module_hash, array2hex),
         total_num_changes: bigint2string(r.total_num_changes),
-        recent_changes: r.recent_changes.map((r) => ({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        recent_changes: r.recent_changes.map((r: any) => ({
             timestamp_nanos: bigint2string(r.timestamp_nanos),
             canister_version: bigint2string(r.canister_version),
             origin: (() => {

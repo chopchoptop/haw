@@ -1,4 +1,4 @@
-import { getManagementCanister } from '@dfinity/agent';
+import { get_management_actor } from '.';
 import { string2principal } from '../data/principal';
 import { ConnectedIdentity } from '../types';
 
@@ -15,7 +15,7 @@ export const deposit_cycles = async ({
     // cycles: number;
 }): Promise<void> => {
     const { agent } = identity;
-    const actor = getManagementCanister({ agent });
+    const actor = get_management_actor(agent);
     await actor.deposit_cycles({
         canister_id: string2principal(canister_id),
     });

@@ -1,5 +1,5 @@
 import { getCrc32 } from '@dfinity/principal/lib/cjs/utils/getCrc';
-import { sha224 } from '@dfinity/principal/lib/cjs/utils/sha224';
+import { sha224 } from '@noble/hashes/sha2';
 import { string2array } from '../data/arrays';
 import { array2hex, hex2array } from '../data/hex';
 import { string2principal } from '../data/principal';

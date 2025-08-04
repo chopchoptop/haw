@@ -1,6 +1,6 @@
 {
     "name": "@choptop/haw",
-    "version": "0.0.14",
+    "version": "0.0.15",
     "description": "ic kit",
     "main": "./dist/index",
     "scripts": {
@@ -33,8 +33,10 @@
         "@cloudflare/workers-types": "^4.20250803.0",
         "@dfinity/agent": "^3.1.0",
         "@dfinity/candid": "^3.1.0",
+        "@dfinity/ic-management": "^6.2.1",
         "@dfinity/identity": "^3.1.0",
         "@dfinity/principal": "^3.1.0",
+        "@noble/hashes": "^1.8.0",
         "dayjs": "^1.11.13"
     },
     "devDependencies": {

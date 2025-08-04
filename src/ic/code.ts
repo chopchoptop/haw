@@ -1,4 +1,4 @@
-import { getManagementCanister } from '@dfinity/agent';
+import { get_management_actor } from '.';
 import { string2principal } from '../data/principal';
 import { ConnectedIdentity } from '../types';
 
@@ -17,7 +17,7 @@ export const install_code = async ({
     arg: Uint8Array | number[];
 }): Promise<void> => {
     const { agent } = identity;
-    const actor = getManagementCanister({ agent });
+    const actor = get_management_actor(agent);
     await actor.install_code({
         canister_id: string2principal(canister_id),
         arg,
@@ -42,7 +42,7 @@ export const upgrade_code = async ({
     arg: Uint8Array | number[];
 }): Promise<void> => {
     const { agent } = identity;
-    const actor = getManagementCanister({ agent });
+    const actor = get_management_actor(agent);
     await actor.install_code({
         canister_id: string2principal(canister_id),
         arg,
@@ -67,7 +67,7 @@ export const reinstall_code = async ({
     arg: Uint8Array | number[];
 }): Promise<void> => {
     const { agent } = identity;
-    const actor = getManagementCanister({ agent });
+    const actor = get_management_actor(agent);
     await actor.install_code({
         canister_id: string2principal(canister_id),
         arg,
@@ -88,7 +88,7 @@ export const uninstall_code = async ({
     canister_id: string;
 }): Promise<void> => {
     const { agent } = identity;
-    const actor = getManagementCanister({ agent });
+    const actor = get_management_actor(agent);
     await actor.uninstall_code({
         canister_id: string2principal(canister_id),
         sender_canister_version: [],

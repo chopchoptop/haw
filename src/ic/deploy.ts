@@ -1,9 +1,9 @@
-import { getManagementCanister } from '@dfinity/agent';
 import { principal2string, string2principal } from '../data/principal';
 import { ConnectedIdentity } from '../types';
 import { string2bigint, wrapOptionMap } from '../data';
 import { install_code } from './code';
 import { start_canister } from './life';
+import { get_management_actor } from '.';
 
 /// 部署罐子
 export const deploy_canister = async ({
@@ -27,8 +27,9 @@ export const deploy_canister = async ({
 }): Promise<void> => {
     // 1. 创建一个新的罐子
     const { agent } = identity;
-    const actor = getManagementCanister({ agent });
-    const r = await actor.create_canister({
+    const actor = get_management_actor(agent);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const r: any = await actor.create_canister({
         settings: wrapOptionMap(settings, (s) => ({
             controllers: wrapOptionMap(s.controllers, (c) => c.map(string2principal)),
             memory_allocation: wrapOptionMap(s.memory_allocation, string2bigint),
