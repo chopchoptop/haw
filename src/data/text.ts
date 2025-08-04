@@ -1,9 +1,5 @@
 // 显示简短的文本
-export const shrinkText = (
-    text: string | undefined,
-    prefix = 5,
-    suffix = 5,
-): string | undefined => {
+export const shrinkText = (text: string | undefined, prefix = 5, suffix = 5): string | undefined => {
     if (!text) return text;
     const max_length = prefix + 3 + suffix; // 保留的字符串长度
     if (text.length <= max_length) return text;
@@ -14,8 +10,6 @@ export const shrinkText = (
 };
 
 // 显示简短的文本
-export const shrinkPrincipal = (text: string | undefined): string | undefined =>
-    shrinkText(text, 5, 3);
+export const shrinkPrincipal = (text: string | undefined): string | undefined => shrinkText(text, 5, 3);
 // 显示简短的文本
-export const shrinkAccount = (text: string | undefined): string | undefined =>
-    shrinkText(text, 4, 4);
+export const shrinkAccount = (text: string | undefined): string | undefined => shrinkText(text, 4, 4);
