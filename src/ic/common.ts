@@ -18,7 +18,7 @@ export const canister_status_info = (
     return new Promise<CanisterInfo>((resolve, reject) => {
         CanisterStatus.request({
             canisterId: string2principal(canister_id),
-            agent: new HttpAgent({
+            agent: HttpAgent.createSync({
                 host, // 默认调用线上的接口
             }),
             paths: ['time', 'controllers', 'subnet', 'module_hash', 'candid'],
@@ -53,7 +53,7 @@ export const canister_module_hash_and_time = (
     }>((resolve, reject) => {
         CanisterStatus.request({
             canisterId: string2principal(canister_id),
-            agent: new HttpAgent({
+            agent: HttpAgent.createSync({
                 host, // 默认调用线上的接口
             }),
             paths: ['time', 'module_hash'],
@@ -76,7 +76,7 @@ export const canister_candid = (canister_id: string, host: string = 'https://icp
     return new Promise<string>((resolve, reject) => {
         CanisterStatus.request({
             canisterId: string2principal(canister_id),
-            agent: new HttpAgent({
+            agent: HttpAgent.createSync({
                 host, // 默认调用线上的接口
             }),
             paths: [

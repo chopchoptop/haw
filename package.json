@@ -1,6 +1,6 @@
 {
     "name": "@choptop/haw",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "description": "ic kit",
     "main": "./dist/index",
     "scripts": {
@@ -33,28 +33,30 @@
         "@dfinity/agent": "*",
         "@dfinity/candid": "*",
         "@dfinity/identity": "*",
-        "@dfinity/principal": "*"
+        "@dfinity/principal": "*",
+        "@icp-sdk/canisters": "*",
+        "@icp-sdk/core": "*"
     },
     "dependencies": {
-        "@cloudflare/workers-types": "^4.20250826.0",
-        "@dfinity/ic-management": "^6.2.2",
-        "@noble/hashes": "^2.0.0",
+        "@cloudflare/workers-types": "^4.20260214.0",
+        "@dfinity/ic-management": "^10.1.0",
+        "@noble/hashes": "^2.0.1",
         "crc-32": "^1.2.2",
-        "dayjs": "^1.11.13"
+        "dayjs": "^1.11.19"
     },
     "devDependencies": {
-        "@eslint/eslintrc": "^3.3.1",
-        "@eslint/js": "^9.34.0",
+        "@eslint/eslintrc": "^3.3.3",
+        "@eslint/js": "^9.39.2",
         "@types/jest": "^30.0.0",
-        "@types/node": "^24.3.0",
-        "@typescript-eslint/eslint-plugin": "^8.41.0",
-        "@typescript-eslint/parser": "^8.41.0",
-        "eslint": "^9.34.0",
+        "@types/node": "^25.2.3",
+        "@typescript-eslint/eslint-plugin": "^8.55.0",
+        "@typescript-eslint/parser": "^8.55.0",
+        "eslint": "^9.39.2",
         "eslint-config-prettier": "^10.1.8",
-        "jest": "^30.1.0",
-        "prettier": "^3.6.2",
-        "ts-jest": "^29.4.1",
-        "typescript": "=5.9.2"
+        "jest": "^30.2.0",
+        "prettier": "^3.8.1",
+        "ts-jest": "^29.4.6",
+        "typescript": "=5.9.3"
     },
     "files": [
         "dist/**/*"

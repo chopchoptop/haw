@@ -18,12 +18,12 @@ export const install_code = async ({
 }): Promise<void> => {
     const { agent } = identity;
     const actor = get_management_actor(agent);
-    await actor.install_code({
-        canister_id: string2principal(canister_id),
-        arg,
-        wasm_module,
+    await actor.installCode({
         mode: { install: null },
-        sender_canister_version: [],
+        canisterId: string2principal(canister_id),
+        wasmModule: new Uint8Array(wasm_module),
+        arg: new Uint8Array(arg),
+        senderCanisterVersion: undefined,
     });
 };
 
@@ -43,12 +43,12 @@ export const upgrade_code = async ({
 }): Promise<void> => {
     const { agent } = identity;
     const actor = get_management_actor(agent);
-    await actor.install_code({
-        canister_id: string2principal(canister_id),
-        arg,
-        wasm_module,
+    await actor.installCode({
         mode: { upgrade: [] },
-        sender_canister_version: [],
+        canisterId: string2principal(canister_id),
+        wasmModule: new Uint8Array(wasm_module),
+        arg: new Uint8Array(arg),
+        senderCanisterVersion: undefined,
     });
 };
 
@@ -68,12 +68,12 @@ export const reinstall_code = async ({
 }): Promise<void> => {
     const { agent } = identity;
     const actor = get_management_actor(agent);
-    await actor.install_code({
-        canister_id: string2principal(canister_id),
-        arg,
-        wasm_module,
+    await actor.installCode({
         mode: { reinstall: null },
-        sender_canister_version: [],
+        canisterId: string2principal(canister_id),
+        wasmModule: new Uint8Array(wasm_module),
+        arg: new Uint8Array(arg),
+        senderCanisterVersion: undefined,
     });
 };
 
@@ -89,8 +89,8 @@ export const uninstall_code = async ({
 }): Promise<void> => {
     const { agent } = identity;
     const actor = get_management_actor(agent);
-    await actor.uninstall_code({
-        canister_id: string2principal(canister_id),
-        sender_canister_version: [],
+    await actor.uninstallCode({
+        canisterId: string2principal(canister_id),
+        senderCanisterVersion: undefined,
     });
 };

@@ -1,6 +1,6 @@
 import { principal2string, string2principal } from '../data/principal';
 import { ConnectedIdentity } from '../types';
-import { string2bigint, wrapOptionMap } from '../data';
+import { string2bigint } from '../data';
 import { get_management_actor } from '.';
 
 /// 创建罐子
@@ -13,40 +13,49 @@ export const create_canister = async ({
     identity: ConnectedIdentity;
     settings?: {
         controllers?: string[];
+        freezing_threshold?: string;
         memory_allocation?: string;
         compute_allocation?: string;
-        freezing_threshold?: string;
         reserved_cycles_limit?: string;
-        wasm_memory_limit?: string;
         log_visibility?: 'controllers' | 'public';
+        wasm_memory_limit?: string;
+        wasm_memory_limit_threshold?: string;
+        environment_variables?: { value: string; name: string }[];
     };
 }): Promise<string> => {
     // 1. 创建一个新的罐子
     const { agent } = identity;
     const actor = get_management_actor(agent);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const r: any = await actor.create_canister({
-        settings: wrapOptionMap(settings, (s) => ({
-            controllers: wrapOptionMap(s.controllers, (c) => c.map(string2principal)),
-            memory_allocation: wrapOptionMap(s.memory_allocation, string2bigint),
-            compute_allocation: wrapOptionMap(s.compute_allocation, string2bigint),
-            freezing_threshold: wrapOptionMap(s.freezing_threshold, string2bigint),
-            reserved_cycles_limit: wrapOptionMap(s.reserved_cycles_limit, string2bigint),
-            wasm_memory_limit: wrapOptionMap(s.wasm_memory_limit, string2bigint),
-            log_visibility: wrapOptionMap(s.freezing_threshold, (s) => {
-                switch (s) {
-                    case 'controllers':
-                        return { controllers: null };
-                    case 'public':
-                        return { public: null };
-                    default:
-                        throw new Error('invalid log_visibility');
-                }
-            }),
-        })),
-        sender_canister_version: [],
+    const _canister_id = await actor.createCanister({
+        settings: settings
+            ? {
+                  controllers: settings.controllers,
+                  freezingThreshold: settings.freezing_threshold
+                      ? string2bigint(settings.freezing_threshold)
+                      : undefined,
+                  memoryAllocation: settings.memory_allocation ? string2bigint(settings.memory_allocation) : undefined,
+                  computeAllocation: settings.compute_allocation
+                      ? string2bigint(settings.compute_allocation)
+                      : undefined,
+                  reservedCyclesLimit: settings.reserved_cycles_limit
+                      ? string2bigint(settings.reserved_cycles_limit)
+                      : undefined,
+                  logVisibility:
+                      settings.log_visibility === 'controllers'
+                          ? 0
+                          : settings.log_visibility === 'public'
+                            ? 1
+                            : undefined,
+                  wasmMemoryLimit: settings.wasm_memory_limit ? string2bigint(settings.wasm_memory_limit) : undefined,
+                  wasmMemoryThreshold: settings.wasm_memory_limit_threshold
+                      ? string2bigint(settings.wasm_memory_limit_threshold)
+                      : undefined,
+                  environmentVariables: settings.environment_variables,
+              }
+            : undefined,
+        senderCanisterVersion: undefined,
     });
-    const canister_id = principal2string(r.canister_id);
+    const canister_id = principal2string(_canister_id);
 
     return canister_id;
 };
@@ -63,7 +72,7 @@ export const start_canister = async ({
 }): Promise<void> => {
     const { agent } = identity;
     const actor = get_management_actor(agent);
-    await actor.start_canister({
+    await actor.startCanister({
         canister_id: string2principal(canister_id),
     });
 };
@@ -80,7 +89,7 @@ export const stop_canister = async ({
 }): Promise<void> => {
     const { agent } = identity;
     const actor = get_management_actor(agent);
-    await actor.stop_canister({
+    await actor.stopCanister({
         canister_id: string2principal(canister_id),
     });
 };
@@ -98,7 +107,7 @@ export const delete_canister = async ({
 }): Promise<void> => {
     const { agent } = identity;
     const actor = get_management_actor(agent);
-    await actor.delete_canister({
+    await actor.deleteCanister({
         canister_id: string2principal(canister_id),
     });
 };
